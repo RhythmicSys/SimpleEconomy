@@ -1,0 +1,5 @@
+name: SimpleEconomy
+version: '${project.version}'
+main: adhdmc.simpleeconomy.SimpleEconomy
+api-version: 1.19
+description: Just an economy plugin
