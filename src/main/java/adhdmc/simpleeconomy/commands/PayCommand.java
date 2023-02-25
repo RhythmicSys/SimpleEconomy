@@ -32,12 +32,13 @@ public class PayCommand implements TabExecutor {
         }
         String firstArg = args[0];
         String secondArg = args[1];
-        OfflinePlayer targetPlayer = SimpleEconomy.getInstance().getServer().getOfflinePlayer(firstArg);
-        if (!targetPlayer.hasPlayedBefore()) {
+        OfflinePlayer testTargetPlayer = SimpleEconomy.getInstance().getServer().getOfflinePlayer(firstArg);
+        if (!testTargetPlayer.hasPlayedBefore()) {
             Component targetName = SimpleEconomy.getMiniMessage().deserialize(firstArg);
             player.sendMessage(Parsing.parsePrefixTarget(SEMessage.ERROR_PLAYER_INVALID.getMessage(), targetName));
             return false;
         }
+        Player targetPlayer = (Player) testTargetPlayer;
         double paymentAmount;
         try {
             paymentAmount = Double.parseDouble(secondArg);
@@ -56,11 +57,11 @@ public class PayCommand implements TabExecutor {
         }
         economy.withdrawPlayer(player, paymentAmount);
         economy.depositPlayer(targetPlayer, paymentAmount);
-
-
-
-
-        return false;
+        player.sendMessage(Parsing.parseTargetValueCurrency(SEMessage.YOU_PAID_TARGET.getMessage(), String.valueOf(paymentAmount), targetPlayer.displayName()));
+        if (targetPlayer.isOnline()) {
+            targetPlayer.sendMessage(Parsing.parseInitiatorValueCurrency(SEMessage.INITIATOR_PAID_YOU.getMessage(), String.valueOf(paymentAmount), player.displayName()));
+        }
+        return true;
     }
 
     @Override

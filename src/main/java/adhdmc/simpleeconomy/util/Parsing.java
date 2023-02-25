@@ -31,4 +31,20 @@ public class Parsing {
                 Placeholder.parsed("plugin_prefix", SEMessage.PLUGIN_PREFIX.getMessage()),
                 Placeholder.parsed("usage", input));
     }
+
+    public static Component parseTargetValueCurrency(String message, String value, Component target) {
+        return miniMessage.deserialize(message,
+                Placeholder.parsed("plugin_prefix", SEMessage.PLUGIN_PREFIX.getMessage()),
+                Placeholder.parsed("currency", SEMessage.CURRENCY.getMessage()),
+                Placeholder.parsed("value", value),
+                Placeholder.component("target", target));
+    }
+
+    public static Component parseInitiatorValueCurrency(String message, String value, Component initiator) {
+        return miniMessage.deserialize(message,
+                Placeholder.parsed("plugin_prefix", SEMessage.PLUGIN_PREFIX.getMessage()),
+                Placeholder.parsed("currency", SEMessage.CURRENCY.getMessage()),
+                Placeholder.parsed("value", value),
+                Placeholder.component("target", initiator));
+    }
 }
