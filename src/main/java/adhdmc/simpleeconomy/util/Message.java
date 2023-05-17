@@ -1,6 +1,6 @@
 package adhdmc.simpleeconomy.util;
 
-public enum SEMessage {
+public enum Message {
 
     PLUGIN_PREFIX("<white>[<green>Economy</green>]</white>"),
     CURRENCY("dollars"),
@@ -19,7 +19,7 @@ public enum SEMessage {
     ;
     String message;
 
-    SEMessage(String message) {
+    Message(String message) {
         this.message = message;
     }
 
